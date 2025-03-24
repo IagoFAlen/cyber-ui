@@ -2,11 +2,19 @@
 
 #include <cstdlib>
 
+#include "primitives/size.hpp"
+#include "primitives/position.hpp"
+
+#include "contexts/sound_context.hpp"
+
 #include "widget.hpp"
+#include "theme.hpp"
 
 using namespace widget;
 using namespace size;
 using namespace position;
+using namespace sound_context;
+using namespace theme;
 
 namespace context {
     typedef struct Context {
@@ -18,14 +26,15 @@ namespace context {
 
         // WIDGETS
         WIDGET* widgets;
-        WIDGET* next;
-        WIDGET* previous;
-        WIDGET* lastWidget;
+        
 
-        // SOUNDS
+        THEME* theme;
 
-        // TEXTURES
-
+        // DATA STRUTURE TO HANDLE ALL CONTEXTS
+        CONTEXT* next;
+        CONTEXT* previous;
+        CONTEXT* lastContext;
+        
         Context(){
             this->id = 0;
             this->positions = NULL;
@@ -33,7 +42,11 @@ namespace context {
             this->widgets = NULL;
             this->next = NULL;
             this->previous = NULL;
-            this->lastWidget = NULL;
+            this->lastContext = NULL;
+            this->theme = NULL;
+            this->next = NULL;
+            this->previous = NULL;
+            this->lastContext = NULL;
         }
 
         void add_widget(CONTEXT* context, WIDGET* widget);
