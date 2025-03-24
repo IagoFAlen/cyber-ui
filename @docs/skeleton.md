@@ -1,26 +1,25 @@
-# How a component should be placed on the screen
+# How a CONTEXT should be placed on the screen
 THEME
 ├── GLOBAL
 │   ├── FONTS
 │   ├── SOUNDS
 │   └── TEXTURES
 └── PANEL
-    ├── COMPONENT
+    ├── CONTEXT
     │   ├── WIDGET
     │   ├── SOUNDS (optional, overrides global sounds)
     │   ├── TEXTURES (optional, overrides global textures)
     │   └── EVENTS (logic for interactions)
-    ├── COMPONENT
+    ├── CONTEXT
     │   ├── WIDGET
     │   ├── SOUNDS
     │   ├── TEXTURES
     │   └── EVENTS
-    └── COMPONENT
+    └── CONTEXT
         ├── WIDGET
         ├── SOUNDS
         ├── TEXTURES
         └── EVENTS
-
 
 # How a Width need to be structured
 WIDGET
@@ -57,4 +56,3 @@ VIDEO
 ├── SOURCE (e.g., filepath or URL)
 ├── LOOP (e.g., true/false)
 └── MUTE (e.g., true/false)
-
