@@ -14,6 +14,7 @@ namespace position {
 
     } POSITION;
 
+    void init_position(unsigned int x, unsigned int y, unsigned int z);
     void set_x(unsigned int x);    
     void set_y(unsigned int y);
     void set_z(unsigned int z);

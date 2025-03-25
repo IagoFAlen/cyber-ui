@@ -14,4 +14,6 @@ namespace size {
     } SIZE;
 
     void set_size(SIZE* size, int width, int height); //, int depth);
+    void set_width(SIZE* size, int width); //, int depth);
+    void set_height(SIZE* size, int height); //, int depth);
 }

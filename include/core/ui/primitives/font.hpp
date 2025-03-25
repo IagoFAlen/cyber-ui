@@ -4,15 +4,17 @@
 
 namespace font {
     typedef struct Font {
-        char* font; // font path
+        char* path; // font path
         unsigned int size;
 
         Font(){
-            this->font = NULL;
+            this->path = NULL;
             this->size = NULL;
         }
 
     } FONT;
     
-    void set_font(char* font, unsigned int size);
+    void set_font(FONT* font, char* path, unsigned int size);
+    void change_font(FONT* font, char* path);
+    void change_size(FONT* font, unsigned int size);
 }

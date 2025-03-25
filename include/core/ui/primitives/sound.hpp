@@ -16,5 +16,8 @@ namespace sound {
 
     } SOUND;
 
-    void set(SOUND* sound, char* name, char* description, char* path);   
+    void init_sound(SOUND* sound, char* name, char* description, char* path);
+    void set_name(SOUND* sound, char* name);
+    void set_description(SOUND* sound, char* description);
+    void set_path(SOUND* sound, char* path);
 }
