@@ -7,10 +7,7 @@
 
 namespace context {
     bool is_empty(CONTEXT* context){
-        if(!context->widgets)
-            return true;
-
-        return false;
+        return context->widgets ? false : true;
     }
 
     void update_ids(WIDGET* widget){

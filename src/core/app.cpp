@@ -9,11 +9,7 @@ using namespace app;
 
 namespace app {
     bool is_empty(APP* app){
-        if(!app->screens){
-            return false;
-        }
-        
-        return true;
+        return app->screens ? false : true;
     }
     
     bool add_app(APP* app, SCREEN* screen){

@@ -15,11 +15,7 @@ namespace screen {
     }
 
     bool is_empty(SCREEN* screen){
-        if(!screen->contexts){
-            return false;
-        }
-        
-        return true;
+        return screen->contexts ? false : true;
     }
     
     bool add_screen(SCREEN* screen, CONTEXT* context){
