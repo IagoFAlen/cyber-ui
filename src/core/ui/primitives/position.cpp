@@ -3,7 +3,7 @@
 #include "include/core/ui/primitives/position.hpp"
 
 namespace position {
-    void init_position(POSITION* position, unsigned int x, unsigned int y, unsigned int z){
+    void set_position(POSITION* position, unsigned int x, unsigned int y, unsigned int z){
         position->x = x;
         position->y = y;
         position->z = z;
