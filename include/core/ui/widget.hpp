@@ -24,9 +24,9 @@ namespace widget {
         CONTENT* contents;
 
         // DATA STRUCTURE TO HANDLE ALL WIDGETS INSIDE A CONTEXT
-        WIDGET* next;
-        WIDGET* previous;
-        WIDGET* lastWidget;
+        Widget* next;
+        Widget* previous;
+        Widget* lastWidget;
 
         Widget(){
             this->id = 0;
@@ -40,8 +40,7 @@ namespace widget {
         }
 
         void set_widget(    
-                            WIDGET* widget, 
-                            unsigned int id, 
+                            WIDGET* widget,
                             char* shape, 
                             POSITION* positions, 
                             THEME* theme, 

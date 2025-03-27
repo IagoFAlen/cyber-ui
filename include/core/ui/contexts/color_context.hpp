@@ -22,7 +22,8 @@ namespace color_context {
             errorColor = NULL;
         }
 
-        void set_color_context(
+        void set_color_context( 
+                                COLOR_CONTEXT* colorContext,
                                 RGBA* primaryColor,
                                 RGBA* secondaryColor,
                                 RGBA* backgroundColor,

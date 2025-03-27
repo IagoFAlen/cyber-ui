@@ -26,7 +26,7 @@ namespace context {
 
         // WIDGETS
         WIDGET* widgets;
-        
+        unsigned int widgetSize;
 
         THEME* theme;
 
@@ -40,6 +40,7 @@ namespace context {
             this->positions = NULL;
             this->sizes = NULL;
             this->widgets = NULL;
+            this->widgetSize = 0;
             this->next = NULL;
             this->previous = NULL;
             this->lastContext = NULL;
@@ -49,10 +50,12 @@ namespace context {
             this->lastContext = NULL;
         }
 
+        bool is_empty(CONTEXT* context);
         void add_widget(CONTEXT* context, WIDGET* widget);
-        void remove_widget_by_id(CONTENT* context, unsigned int id);
-        void pop_widget(CONTENT* context);
-        void peek_widget(CONTENT* context);
+        void update_ids(WIDGET* widget);
+        void remove_widget_by_id(CONTEXT* context, unsigned int id);
+        void pop_widget(CONTEXT* context);
+        WIDGET* peek_widget(CONTEXT* context);
 
     } CONTEXT;
 }

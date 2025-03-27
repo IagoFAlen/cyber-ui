@@ -1,22 +1,22 @@
 #pragma once
 
-#include "ui/config.hpp"
-#include "ui/context.hpp"
+#include <cstdlib>
 
-using namespace config;
-using namespace context;
+#include "screen.hpp"
+
+using namespace screen;
 
 namespace app {
-    typedef struct App {
-        CONFIG* config;
-        CONTEXT* contexts;
-        
-        App() {
-            this->config = NULL;
-            this->contexts = NULL;
-        }
+    typedef struct app {        
+        SCREEN* screens;
+        unsigned int screenSize;
 
-        void init_app(APP* app, CONFIG* config);
-        void add_context(APP* app, CONTEXT* context);
+        app(){
+            this->screens = NULL;
+            this->screenSize = 0;
+        }
+        
     } APP;
+
+    bool add_screen(APP* app, SCREEN* screen);
 }

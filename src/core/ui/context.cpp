@@ -2,57 +2,92 @@
 
 #include <cstdlib>
 
-#include "primitives/size.hpp"
-#include "primitives/position.hpp"
-
-#include "contexts/sound_context.hpp"
-
-#include "widget.hpp"
-#include "theme.hpp"
-
-using namespace widget;
-using namespace size;
-using namespace position;
-using namespace sound_context;
-using namespace theme;
+#include "include/core/ui/widget.hpp"
+#include "include/core/ui/context.hpp"
 
 namespace context {
-    typedef struct Context {
-        unsigned int id;
-        SIZE* sizes;
-        POSITION* positions;
+    bool is_empty(CONTEXT* context){
+        if(!context->widgets)
+            return true;
 
-        // CONTEXT means a/group of WIDGETS with the same pattern
+        return false;
+    }
 
-        // WIDGETS
-        WIDGET* widgets;
-        
+    void update_ids(WIDGET* widget){
+        widget->id--;
+        if(widget->next)
+            return update_ids(widget->next);
+    }
 
-        THEME* theme;
-
-        // DATA STRUTURE TO HANDLE ALL CONTEXTS
-        CONTEXT* next;
-        CONTEXT* previous;
-        CONTEXT* lastContext;
-        
-        Context(){
-            this->id = 0;
-            this->positions = NULL;
-            this->sizes = NULL;
-            this->widgets = NULL;
-            this->next = NULL;
-            this->previous = NULL;
-            this->lastContext = NULL;
-            this->theme = NULL;
-            this->next = NULL;
-            this->previous = NULL;
-            this->lastContext = NULL;
+    bool add_widget(CONTEXT* context, WIDGET* widget){
+        if(!context->widgets){
+            widget->id = 0;
+            context->widgets = widget;
+            context->widgets->lastWidget = widget;
+            context->widgetSize++;
+            return true;
         }
 
-        void add_widget(CONTEXT* context, WIDGET* widget);
-        void remove_widget_by_id(CONTENT* context, unsigned int id);
-        void pop_widget(CONTENT* context);
-        void peek_widget(CONTENT* context);
+        if(context->widgets){
+            WIDGET* lastWidget = context->widgets->lastWidget;
+            widget->id = lastWidget->id + 1;
+            lastWidget->next = widget;
+            lastWidget->next->previous  = lastWidget;
+            context->widgets->lastWidget = lastWidget->next; 
+            context->widgetSize++;
+            return true;
+        }
 
-    } CONTEXT;
+        return false;
+    }
+
+    void remove_widget(CONTEXT* context, WIDGET* widget){
+        if(widget->previous)
+            widget->previous->next = widget->next;
+        else{
+            // Se não tem o anterior, significa que é o primeiro
+            context->widgets = context->widgets->next;
+            context->widgets->previous = NULL;
+        }
+        
+        if(widget->next)
+            widget->next->previous = widget->previous;
+        else{
+            // Se não tem o posterior, significa que é o último
+            context->widgets->lastWidget = context->widgets->lastWidget->previous; 
+            context->widgets->lastWidget->next = NULL;
+        }
+
+        widget->next = NULL;
+        widget->previous = NULL;
+
+        context->widgetSize--;
+        delete widget;
+    }
+
+    void remove_widget_by_id(CONTEXT* context, unsigned int id){
+        for(WIDGET* currentWidget = context->widgets; currentWidget != NULL; currentWidget = currentWidget->next){
+            if(currentWidget->id == id){
+                update_ids(currentWidget);
+                remove_widget(context, currentWidget);
+                context->widgetSize--; 
+                return;
+            }
+        }
+    }
+
+    void pop_widget(CONTEXT* context){
+        if(!is_empty(context)){
+            remove_widget(context, context->widgets->lastWidget);
+            context->widgetSize--;
+        }
+    }
+
+    WIDGET* peek_widget(CONTEXT* context){
+        if(!is_empty(context))
+            return context->widgets->lastWidget;
+        else
+            return NULL;
+    }
+
 }
